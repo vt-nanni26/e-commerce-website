@@ -7,15 +7,17 @@
 
 <h1>Product List</h1>
 
-{% for product in products %}
-    <div>
-        <h3>{{ product.name }}</h3>
+{% for product in products %} {% comment %}Loop through products passed from the view{% endcomment %}
+    <div style="border:1px solid #ccc; padding:10px; margin:10px;">
+         <h3>{{ product.name }}</h3> {% comment %}Display product name {% endcomment %}
         <p>Price: ₹{{ product.price }}</p>
         <p>{{ product.description }}</p>
         <hr>
+  
+   <a href="{% url 'add_to_cart' product.id %}">
+            <button>Add to Cart</button>
+            </a>
     </div>
-{% empty %}
-    <p>No products available</p>
 {% endfor %}
 
 </body>
