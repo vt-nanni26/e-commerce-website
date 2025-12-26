@@ -6,7 +6,8 @@
 <body>
 
 <h1>Product List</h1>
-
+<a href="{% url 'cart' %}">View Cart</a>
+<hr>
 {% for product in products %} {% comment %}Loop through products passed from the view{% endcomment %}
     <div style="border:1px solid #ccc; padding:10px; margin:10px;">
          <h3>{{ product.name }}</h3> {% comment %}Display product name {% endcomment %}
