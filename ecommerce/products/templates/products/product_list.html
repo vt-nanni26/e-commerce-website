@@ -6,6 +6,14 @@
 <body>
 
 <h1>Product List</h1>
+{% if user.is_authenticated %}
+    Welcome, {{ user.username }} |
+    <a href="{% url 'logout' %}">Logout</a>
+{% else %}
+    <a href="{% url 'login' %}">Login</a>
+{% endif %}
+<hr>
+
 <a href="{% url 'cart' %}">View Cart</a>
 <hr>
 {% for product in products %} {% comment %}Loop through products passed from the view{% endcomment %}
@@ -18,6 +26,10 @@
    <a href="{% url 'add_to_cart' product.id %}">
             <button>Add to Cart</button>
             </a>
+    <a href="{% url 'my_orders' %}">My Orders</a> |
+<a href="{% url 'cart' %}">My Cart</a>
+<hr>
+
     </div>
 {% endfor %}
 

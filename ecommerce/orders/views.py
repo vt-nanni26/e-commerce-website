@@ -49,3 +49,9 @@ def checkout(request):
 
     return render(request, 'orders/checkout_success.html')
 
+@login_required
+def my_orders(request):
+    orders = Order.objects.filter(user=request.user, is_placed=True)
+    return render(request, 'orders/my_orders.html', {
+        'orders': orders
+    })

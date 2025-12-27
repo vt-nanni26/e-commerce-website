@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Orders</title>
+</head>
+<body>
+
+<h1>My Orders</h1>
+
+{% if orders %}
+<table border="1" cellpadding="10">
+    <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Total Price</th>
+        <th>Status</th>
+    </tr>
+
+    {% for order in orders %}
+    <tr>
+        <td>{{ order.product.name }}</td>
+        <td>{{ order.quantity }}</td>
+        <td>₹{{ order.total_price }}</td>
+        <td>Placed</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No orders placed yet.</p>
+{% endif %}
+
+<a href="/products/">Continue Shopping</a>
+
+</body>
+</html>

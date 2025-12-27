@@ -23,6 +23,7 @@ urlpatterns = [
     path('products/', include('products.urls')),
     path('users/', include('users.urls')),
     path('orders/', include('orders.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
 urlpatterns += [
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
