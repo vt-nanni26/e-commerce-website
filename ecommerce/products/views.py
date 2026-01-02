@@ -6,11 +6,6 @@ def product_list(request):
     # return HttpResponse("product list page working")
     products = Product.objects.all()
     return render(request, 'products/product_list.html', {'products': products})
-def add_to_cart(request, product_id):
-    cart=request.session.get('cart', {})
-    cart[product_id] = cart.get(product_id, 0) + 1
-    request.session['cart'] = cart
-    return redirect('product_list')
 
 @login_required
 def add_to_cart(request, product_id):
@@ -24,3 +19,6 @@ def add_to_cart(request, product_id):
     )
 
     return redirect('product_list')
+def product_detail(request, id):
+    product = Product.objects.get(id=id)
+    return render(request, 'products/product_detail.html', {'product': product})

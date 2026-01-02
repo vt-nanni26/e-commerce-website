@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %}My Shop{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'products/style.css' %}">
+</head>
+
+<body>
+<nav class="navbar">
+    <div class="logo">MyShop</div>
+    <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/products/">Products</a></li>
+        {% if user.is_authenticated %}
+            <li><a href="/cart/">Cart</a></li>
+            <li><a href="/orders/my-orders/">My Orders</a></li>
+            <li><a href="/accounts/logout/">Logout</a></li>
+        {% else %}
+            <li><a href="/login/">Login</a></li>
+        {% endif %}
+    </ul>
+</nav>
+
+<div class="container">
+    {% block content %}
+    {% endblock %}
+</div>
+
+</body>
+</html>

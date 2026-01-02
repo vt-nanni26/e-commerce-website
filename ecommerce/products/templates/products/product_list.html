@@ -1,37 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Products</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load static %}
 
+{% block content %}
 <h1>Product List</h1>
-{% if user.is_authenticated %}
-    Welcome, {{ user.username }} |
-    <a href="{% url 'logout' %}">Logout</a>
-{% else %}
-    <a href="{% url 'login' %}">Login</a>
-{% endif %}
-<hr>
 
-<a href="{% url 'cart' %}">View Cart</a>
-<hr>
-{% for product in products %} {% comment %}Loop through products passed from the view{% endcomment %}
-    <div style="border:1px solid #ccc; padding:10px; margin:10px;">
-         <h3>{{ product.name }}</h3> {% comment %}Display product name {% endcomment %}
-        <p>Price: ₹{{ product.price }}</p>
-        <p>{{ product.description }}</p>
-        <hr>
-  
-   <a href="{% url 'add_to_cart' product.id %}">
-            <button>Add to Cart</button>
-            </a>
-    <a href="{% url 'my_orders' %}">My Orders</a> |
-<a href="{% url 'cart' %}">My Cart</a>
-<hr>
-
+<div class="product-grid">
+    {% for product in products %}
+    <div class="product-card">
+        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        <h3>{{ product.name }}</h3>
+        <p class="price">₹{{ product.price }}</p>
+        <a href="{{ product.id }}/">
+            <button class="btn-view">View Details</button>
+        </a>
     </div>
-{% endfor %}
-
-</body>
-</html>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,14 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Order Placed</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-<h1>✅ Order Placed Successfully!</h1>
-<p>Thank you for shopping with us.</p>
+{% block title %}Order Placed{% endblock %}
 
-<a href="/products/">Continue Shopping</a>
-
-</body>
-</html>
+{% block content %}
+<div class="text-center">
+    <div class="alert alert-success" role="alert">
+        <h1 class="alert-heading">✅ Order Placed Successfully!</h1>
+        <p>Thank you for shopping with us. Your order has been placed and will be processed soon.</p>
+        <hr>
+        <p class="mb-0">You can track your orders in the <a href="{% url 'my_orders' %}">My Orders</a> section.</p>
+    </div>
+    <a href="{% url 'product_list' %}" class="btn btn-primary">Continue Shopping</a>
+</div>
+{% endblock %}

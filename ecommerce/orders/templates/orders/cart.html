@@ -1,43 +1,24 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>My Cart</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-<h1>My Cart</h1>
+{% block content %}
+<h2>Your Cart</h2>
 
 {% if cart_items %}
-<table border="1" cellpadding="10">
-    <tr>
-        <th>Product</th>
-        <th>Price</th>
-        <th>Quantity</th>
-        <th>Total</th>
-        <th>Action</th>
-    </tr>
-    
-
+<div class="cart-items">
     {% for item in cart_items %}
-    <tr>
-        <td>{{ item.product.name }}</td>
-        <td>₹{{ item.product.price }}</td>
-        <td>{{ item.quantity }}</td>
-        <td>₹{{ item.total_price }}</td>
-        <td><a href="{% url 'remove_from_cart' item.id %}">Remove</a></td>
-    </tr>
+    <div class="cart-item">
+        <h3>{{ item.product.name }}</h3>
+        <p>Quantity: {{ item.quantity }}</p>
+        <p>Price: ₹{{ item.total_price }}</p>
+        <a href="{% url 'remove_from_cart' item.id %}"><button class="btn-remove">Remove</button></a>
+    </div>
     {% endfor %}
-</table>
-
-<h3>Grand Total: ₹{{ total_amount }}</h3>
-{% if cart_items %}
-    <h3>Grand Total: ₹{{ total_amount }}</h3>
-    <a href="{% url 'checkout' %}">Place Order</a>
-{% endif %}
-
+</div>
+<div class="total">
+    <p>Total: ₹{{ total_amount }}</p>
+    <a href="{% url 'checkout' %}"><button class="btn-checkout">Checkout</button></a>
+</div>
 {% else %}
 <p>Your cart is empty</p>
 {% endif %}
-
-</body>
-</html>
+{% endblock %}

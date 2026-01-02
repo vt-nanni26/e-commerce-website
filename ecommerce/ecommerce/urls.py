@@ -17,16 +17,25 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from django.contrib.auth import views as auth_views
+from django.conf import settings
+from django.conf.urls.static import static
+from users.views import user_login, user_logout
+from products.views import product_list
+from orders.views import cart, place_order, my_orders, checkout, remove_from_cart
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', product_list, name='home'),
     path('products/', include('products.urls')),
     path('users/', include('users.urls')),
-    path('orders/', include('orders.urls')),
-    path('accounts/', include('django.contrib.auth.urls')),
+    path('cart/', cart, name='cart'),
+    path('orders/checkout/', checkout, name='checkout'),
+    path('orders/remove/<int:order_id>/', remove_from_cart, name='remove_from_cart'),
+    path('orders/place/', place_order, name='place_order'),
+    path('orders/my-orders/', my_orders, name='my_orders'),
+    path('accounts/', include('users.urls')),
 ]
 urlpatterns += [
-    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
-    path('login/', auth_views.LoginView.as_view(), name='login'),
-]
-
+    path('logout/', user_logout, name='logout'),
+    path('login/', user_login, name='login'),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
